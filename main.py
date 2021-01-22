@@ -22,7 +22,11 @@ async def start(client, message):
     await message.reply_text(
         f"Hello {message.from_user.first_name},\nIm telegram to telegra.ph image uploader bot by @W4RR10R",
         True,
-        PM_IMG = "https://telegra.ph/file/717b3eff2ba34d1de6b98.png"
+        START_IMG = os.environ.get('START_IMG', None)
+if START_IMG is None:
+    img = "https://www.betabreakers.com/wp-content/uploads/2016/05/38699913_S.jpg"
+else:
+  img = START_IMG
     )
 
 
