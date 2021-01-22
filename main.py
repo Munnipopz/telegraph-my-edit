@@ -15,7 +15,11 @@ TGraph = Client(
     api_id=Credentials.API_ID,
     api_hash=Credentials.API_HASH,
 )
-
+START_IMG = os.environ.get('START_IMG', None)
+if START_IMG is None:
+    img = "https://www.betabreakers.com/wp-content/uploads/2016/05/38699913_S.jpg"
+else:
+  img = START_IMG
 
 @TGraph.on_message(filters.command("start"))
 async def start(client, message):
