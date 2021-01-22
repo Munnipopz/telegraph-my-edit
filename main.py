@@ -22,6 +22,7 @@ async def start(client, message):
     await message.reply_text(
         f"Hello {message.from_user.first_name},\nIm telegram to telegra.ph image uploader bot by @W4RR10R",
         True,
+        PM_IMG = "https://telegra.ph/file/717b3eff2ba34d1de6b98.png"
     )
 
 
