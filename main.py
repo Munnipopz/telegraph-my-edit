@@ -15,16 +15,12 @@ TGraph = Client(
     api_id=Credentials.API_ID,
     api_hash=Credentials.API_HASH,
 )
-START_IMG = os.environ.get('START_IMG', None)
-if START_IMG is None:
-    img = "https://www.betabreakers.com/wp-content/uploads/2016/05/38699913_S.jpg"
-else:
-  img = START_IMG
+
 
 @TGraph.on_message(filters.command("start"))
 async def start(client, message):
     await message.reply_text(
-        f"Hello {message.from_user.first_name},\nIm telegram to telegra.ph image uploader bot by @Munnipopz",
+        f"Hello {message.from_user.first_name},\nIm telegram to telegra.ph image uploader bot by  @Munnipopz https://t.me/c/1334101352/2 ",
         True,
         
     )
