@@ -21,7 +21,7 @@ TGraph = Client(
 async def start(client, message):
     await message.reply_text(
         f"Hello {message.from_user.first_name},\nIm telegram to telegra.ph image uploader bot by  @Munnipopz https://telegra.ph/file/6f8d9001de13b3f8e573a.jpg ",
-        f"**My Boss** : {DEFAULTUSER} ",
+        f"[Deploy FridayUserbot](https://telegra.ph/FRIDAY-06-15) ",
         True,
         
     )
