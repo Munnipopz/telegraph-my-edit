@@ -20,7 +20,8 @@ TGraph = Client(
 
 
 @Client.on_message(filters.command(["test"]) )
-       await message.reply_text(
+async def test(client, message):
+        await message.reply_text(
             text="{text}",
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
