@@ -27,24 +27,7 @@ def send_start(bot, update):
         disable_web_page_preview=True,
         reply_to_message_id=update.message_id
 
-@Client.on_message(filters.command(["start"]))
-       await message.reply_text(
-            text="{ഹാഹാഹഹഹഹ}",
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton("Button", url="{https://t.me/mpazaan}"),
-                        InlineKeyboardButton("Button", url="{https://t.me/mpazaan}"),
-                    ],
-                    [
-                        InlineKeyboardButton(
-                            "Button 3", url="{https://t.me/mpazaan}")
-                    ]
-                ]
-            ),
-            reply_to_message_id=message.message_id
-        )
+
 
 
 @TGraph.on_message(filters.photo)
