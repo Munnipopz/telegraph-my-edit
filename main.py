@@ -16,16 +16,16 @@ TGraph = Client(
     api_hash=Credentials.API_HASH,
 )
 
-@Client.on_message(filters.command(["help"]))
-def help_user(bot, update):
+@Client.on_message(filters.command(["start"]))
+def send_start(bot, update):
+    # logger.info(update)
+    
     bot.send_message(
         chat_id=update.chat.id,
-        text=script.HELP_USER,
-        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="⭕️ Contact DEV ⭕️", url="https://t.me/prgofficial")]]),
+        text=script.START_TEXT.format(update.from_user.first_name),
         parse_mode="html",
         disable_web_page_preview=True,
         reply_to_message_id=update.message_id
-    )
 
 @Client.on_message(filters.command(["start"]))
 async def test(client, message):
