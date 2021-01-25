@@ -19,20 +19,20 @@ TGraph = Client(
 )
 
 
-@Client.on_message(filters.command(["test"]))
+@Client.on_message(filters.command(["start"]))
 async def test(client, message):
        await message.reply_text(
-            text="{text}",
+            text="{ഹാഹാഹഹഹഹ}",
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("Button 1", url="{link}"),
-                        InlineKeyboardButton("Button 2", url="{link}"),
+                        InlineKeyboardButton("Button", url="{https://t.me/mpazaan}"),
+                        InlineKeyboardButton("Button", url="{https://t.me/mpazaan}"),
                     ],
                     [
                         InlineKeyboardButton(
-                            "Button 3", url="{link}")
+                            "Button 3", url="{https://t.me/mpazaan}")
                     ]
                 ]
             ),
