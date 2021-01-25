@@ -2,13 +2,11 @@ import os
 import uuid
 import shutil
 import logging
+import pyrogram
+
 from pyrogram import Client, filters
-from creds import Credentials
-from telegraph import upload_file
-from pyrogram import Client
-from pyrogram import filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-logging.basicConfig(level=logging.INFO)
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ForceReply
+from pyrogram.errors import UserNotParticipant
 
 
 TGraph = Client(
@@ -18,6 +16,16 @@ TGraph = Client(
     api_hash=Credentials.API_HASH,
 )
 
+@Client.on_message(filters.command(["help"]))
+def help_user(bot, update):
+    bot.send_message(
+        chat_id=update.chat.id,
+        text=script.HELP_USER,
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="⭕️ Contact DEV ⭕️", url="https://t.me/prgofficial")]]),
+        parse_mode="html",
+        disable_web_page_preview=True,
+        reply_to_message_id=update.message_id
+    )
 
 @Client.on_message(filters.command(["start"]))
 async def test(client, message):
