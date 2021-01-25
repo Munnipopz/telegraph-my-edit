@@ -28,7 +28,6 @@ def send_start(bot, update):
         reply_to_message_id=update.message_id
 
 @Client.on_message(filters.command(["start"]))
-async def test(client, message):
        await message.reply_text(
             text="{ഹാഹാഹഹഹഹ}",
             disable_web_page_preview=True,
