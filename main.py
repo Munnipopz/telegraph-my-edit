@@ -5,10 +5,16 @@ import logging
 from pyrogram import Client, filters
 from creds import Credentials
 from telegraph import upload_file
+
+logging.basicConfig(level=logging.INFO)
+
+from pyrogram import Client, filters
+from creds import Credentials
+from telegraph import upload_file
 from pyrogram import Client
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-logging.basicConfig(level=logging.INFO)
+
 
 
 TGraph = Client(
