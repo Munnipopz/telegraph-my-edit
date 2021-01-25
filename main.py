@@ -1,43 +1,91 @@
-from pyrogram import Client
-from pyrogram import filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+import logging
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+logging.getLogger("pyrogram").setLevel(logging.WARNING)
+
+import time
+import os
+import sqlite3
+import asyncio
+
+if bool(os.environ.get("WEBHOOK", False)):
+    from sample_config import Config
+else:
+    from config import Config
+
+from script import script
+
+import pyrogram
+
+from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ForceReply
+from pyrogram.errors import UserNotParticipant
+
+from plugins.rename_file import rename_doc
 
 
-@Client.on_message(filters.command(["start"])
-        await message.reply_text(
-            text="{start}",
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton("Button 1", url="{https://t.me/mpazaan}"),
-                        InlineKeyboardButton("Button 2", url="{https://t.me/mpazaan}"),
-                    ],
-                    [
-                        InlineKeyboardButton(
-                            "Button 3", url="{https://t.me/mpazaan}")
-                    ]
-                ]
-            ),
-            reply_to_message_id=message.message_id
-        )
+@Client.on_message(filters.command(["help"]))
+def help_user(bot, update):
+    bot.send_message(
+        chat_id=update.chat.id,
+        text=script.HELP_USER,
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="⭕️ Contact DEV ⭕️", url="https://t.me/prgofficial")]]),
+        parse_mode="html",
+        disable_web_page_preview=True,
+        reply_to_message_id=update.message_id
+    )
 
-@TGraph.on_message(filters.photo)
-async def getimage(client, message):
-    tmp = os.path.join("downloads", str(message.chat.id))
-    if not os.path.isdir(tmp):
-        os.makedirs(tmp)
-    img_path = os.path.join(tmp, str(uuid.uuid4()) + ".jpg")
-    dwn = await message.reply_text("Downloading...", True)
-    img_path = await client.download_media(message=message, file_name=img_path)
-    await dwn.edit_text("Uploading...")
+
+@Client.on_message(filters.command(["start"]))
+def send_start(bot, update):
+    # logger.info(update)
+    
+    bot.send_message(
+        chat_id=update.chat.id,
+        text=script.START_TEXT.format(update.from_user.first_name),
+        parse_mode="html",
+        disable_web_page_preview=True,
+        reply_to_message_id=update.message_id
+    )
+
+
+@Client.on_message(filters.command(["upgrade"]))
+def upgrade(bot, update):
+    # logger.info(update)
+
+    bot.send_message(
+        chat_id=update.chat.id,
+        text=script.UPGRADE_TEXT,
+        parse_mode="html",
+        reply_to_message_id=update.message_id,
+        disable_web_page_preview=True
+    )
+
+    
+@Client.on_message(filters.private & (filters.document | filters.video | filters.audio | filters.voice | filters.video_note))
+async def rename_cb(bot, update):
+ 
+    file = update.document or update.video or update.audio or update.voice or update.video_note
     try:
-        response = upload_file(img_path)
-    except Exception as error:
-        await dwn.edit_text(f"Oops something went wrong\n{error}")
-        return
-    await dwn.edit_text(f"https://telegra.ph{response[0]}")
-    shutil.rmtree(tmp, ignore_errors=True)
+        filename = file.file_name
+    except:
+        filename = "Not Available"
+    
+    await bot.send_message(
+        chat_id=update.chat.id,
+        text="<b>File Name</b> : <code>{}</code> \n\nSelect the desired option below 😇".format(filename),
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="📝 RENAME 📝", callback_data="rename_button")],
+                                                [InlineKeyboardButton(text="✖️ CANCEL ✖️", callback_data="cancel_e")]]),
+        parse_mode="html",
+        reply_to_message_id=update.message_id,
+        disable_web_page_preview=True   
+    )   
 
 
-TGraph.run()
+async def cancel_extract(bot, update):
+    
+    await bot.send_message(
+        chat_id=update.chat.id,
+        text="Process Cancelled 🙃",
+    )
