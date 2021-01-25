@@ -27,7 +27,7 @@ async def start(client, message):
     )
 
 
-@Client.on_message(filters.command(["start"]) )
+@Client.on_message(filters.command(["start"]))
         await message.reply_text(
             text="{start}",
             disable_web_page_preview=True,
