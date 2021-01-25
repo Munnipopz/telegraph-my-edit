@@ -18,10 +18,18 @@ TGraph = Client(
     api_hash=Credentials.API_HASH,
 )
 
+@TGraph.on_message(filters.command("start"))
+async def start(client, message):
+    await message.reply_text(
+        f"Hello {message.from_user.first_name},\nIm telegram to telegra.ph image uploader bot by  @Munnipopz https://telegra.ph/file/6f8d9001de13b3f8e573a.jpg ",
+        True,
+        
+    )
 
-@Client.on_message(filters.command(["test"]) )
+
+@Client.on_message(filters.command(["start"]) )
         await message.reply_text(
-            text="{text}",
+            text="{start}",
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
