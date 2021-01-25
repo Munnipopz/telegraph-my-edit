@@ -8,7 +8,7 @@ from telegraph import upload_file
 from pyrogram import Client
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-
+logging.basicConfig(level=logging.INFO)
 
 
 TGraph = Client(
