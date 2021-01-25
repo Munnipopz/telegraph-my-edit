@@ -1,7 +1,3 @@
-import os
-import uuid
-import shutil
-import logging
 from pyrogram import Client, filters
 from creds import Credentials
 from telegraph import upload_file
