@@ -24,7 +24,7 @@ TGraph = Client(
 )
 
 
-@Client.on_message(filters.command(["start"]))
+@TGraph.on_message(filters.command(["start"]))
 async def test(client, message):
         await message.reply_text(
             text="{text}",
