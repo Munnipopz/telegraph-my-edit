@@ -24,13 +24,6 @@ TGraph = Client(
 )
 
 
-@TGraph.on_message(filters.command("start"))
-async def start(client, message):
-    await message.reply_text(
-        f"Hello {message.from_user.first_name},\nIm telegram to telegra.ph image uploader bot by  @Munnipopz https://telegra.ph/file/6f8d9001de13b3f8e573a.jpg ",
-        True,
-        
-    )
 @Client.on_message(filters.command(["test"]))
 async def test(client, message):
         await message.reply_text(
